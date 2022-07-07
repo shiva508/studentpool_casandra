@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pool.casandra.entity.Folder;
 
-@Repository
-public interface FolderRepository extends CassandraRepository<Folder,String>{
+//@Repository
+public interface FolderRepository extends CassandraRepository<Folder, String> {
     public List<Folder> findByUserid(String userid);
 }

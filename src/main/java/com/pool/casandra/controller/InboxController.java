@@ -1,5 +1,6 @@
 package com.pool.casandra.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,27 @@ public class InboxController {
     private FolderService folderService;
 
     @GetMapping("/home")
-    public String homePge(Model model) {
+    public String homePage(Model model) {
         List<Folder> folders=folderService.findByUserid("dasarishiva1@gmail.com");
         model.addAttribute("folders", folders);
         return "inbox-page";
+    }
+
+    @GetMapping("/index")
+    public String index(Model model) {
+        List<Folder> defaultFolders=Arrays.asList(
+            new Folder().setUserid("dasarishiva1@gmail.com").setLable("Inbox").setColor("white"),
+            new Folder().setUserid("dasarishiva1@gmail.com").setLable("Sent Items").setColor("green"),
+            new Folder().setUserid("dasarishiva1@gmail.com").setLable("Impartant").setColor("red")
+            );
+
+        List<Folder> userFolders=Arrays.asList(
+            new Folder().setUserid("dasarishiva1@gmail.com").setLable("Inbox").setColor("white"),
+            new Folder().setUserid("dasarishiva1@gmail.com").setLable("Sent Items").setColor("green"),
+            new Folder().setUserid("dasarishiva1@gmail.com").setLable("Impartant").setColor("red")
+            );
+        model.addAttribute("userFolders", userFolders);
+        model.addAttribute("defaultFolders", defaultFolders);
+        return "index";
     }
 }
