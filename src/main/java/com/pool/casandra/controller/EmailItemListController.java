@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pool.casandra.entity.EmailListItem;
@@ -28,6 +29,13 @@ public class EmailItemListController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllEmailItems() {
         List<EmailListItem> emailListItems = emailListItemService.getAll();
+        return new ResponseEntity<>(emailListItems, HttpStatus.OK);
+    }
+
+    @GetMapping("/findby")
+    public ResponseEntity<?> findByKeyIdAndKeyLabel(@RequestParam("userid") String id,
+            @RequestParam("label") String label) {
+        List<EmailListItem> emailListItems = emailListItemService.findByKeyIdAndKeyLabel(id, label);
         return new ResponseEntity<>(emailListItems, HttpStatus.OK);
     }
 }

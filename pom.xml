@@ -10,11 +10,11 @@
 	</parent>
 	<groupId>com.pool</groupId>
 	<artifactId>studentpool_casandra</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>studentpool_casandra</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,6 +64,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				 <imageName>studentpool_casandra</imageName>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -74,5 +75,73 @@
 			</plugin>
 		</plugins>
 	</build>
-
+<profiles>
+		<profile>
+			<id>build-with-fabric-8</id>
+			<build>
+				<plugins>
+					<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>0.40.1</version>
+					<configuration>
+						<images>
+							<image>
+								<name>${project.name}:${project.version}</name>
+								<build>
+									<from>openjdk:17</from>
+									<assembly>
+										<name>build</name>
+										<descriptorRef>artifact</descriptorRef>
+									</assembly>
+									<ports>
+										<port>8080</port>
+									</ports>
+									<cmd>java -jar build/${project.name}-${project.version}.jar</cmd>
+								</build>
+							</image>
+						</images>
+					</configuration>
+						<executions>
+						<execution>
+							<id>build-image</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>build</goal>
+							</goals>
+						</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>build-with-jib</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>3.2.1</version>
+						<configuration>
+							<from>
+								<image>openjdk:17</image>
+							</from>
+							<to>
+								<image>jib-build-${project.name}:${project.version}</image>
+							</to>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>dockerBuild</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

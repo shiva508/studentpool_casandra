@@ -8,4 +8,6 @@ public interface EmailListItemService {
     public EmailListItem saveEmailListItem(EmailListItem emailListItem);
 
     public List<EmailListItem> getAll();
+
+    List<EmailListItem> findByKeyIdAndKeyLabel(String id, String label);
 }
