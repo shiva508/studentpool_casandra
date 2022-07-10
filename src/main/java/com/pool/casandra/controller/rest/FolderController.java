@@ -1,4 +1,4 @@
-package com.pool.casandra.controller;
+package com.pool.casandra.controller.rest;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

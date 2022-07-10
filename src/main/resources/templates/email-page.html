@@ -103,25 +103,23 @@
       </nav>
 
       <main>
-        <div class="card" th:if="${emailListItems}">
-          <div class="card-header" th:text="${foldName}"></div>
-          <div class="card-body">
-            <div class="list-group">
-              <a
-                th:each="emailListItem:${emailListItems}"
-                th:href="@{'/viewemail/'+${emailListItem.key.timeUuid}}"
-                class="list-group-item list-group-item-action flex-column align-items-start active"
-              >
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1" th:text="${emailListItem.subject}"></h5>
-                  <small th:text="${emailListItem.agoTime}">3 days ago</small>
-                </div>
-                <p class="mb-1" th:text="${emailListItem.to}">
-                  Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                  diam eget risus varius blandit.
-                </p>
-              </a>
-            </div>
+        <div class="card" th:if="${email}">
+          <div class="card-header text-center">View Email</div>
+          <div class="card-header">
+            From: <span th:text="${email.from}"></span>
+          </div>
+          <div class="card-header">
+            To: <span th:text="${toAdderess}"></span>
+          </div>
+          <div class="card-header">
+            Subject: <span th:text="${email.subject}"></span>
+          </div>
+
+          <div class="card-body text-center">
+            <p class="card-text" th:text="${email.body}">
+              With supporting text below as a natural lead-in to additional
+              content.
+            </p>
           </div>
         </div>
       </main>

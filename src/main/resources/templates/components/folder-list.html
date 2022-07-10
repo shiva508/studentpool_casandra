@@ -11,7 +11,11 @@
               class="list-group-item d-flex justify-content-between align-items-center"
               th:each="folder:${folders}"
             >
-              <span th:text="${folder.lable}">Folder</span>
+              <a
+                th:href="@{'/index/?folder='+${folder.lable}}"
+                th:text="${folder.lable}"
+                >Folder</a
+              >
               <span class="badge badge-primary badge-pill badge-color">14</span>
             </li>
           </ul>

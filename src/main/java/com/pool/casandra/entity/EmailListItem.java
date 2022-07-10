@@ -2,6 +2,8 @@ package com.pool.casandra.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -21,6 +23,9 @@ public class EmailListItem implements Serializable {
 
     @CassandraType(type = Name.BOOLEAN)
     private boolean isUnread;
+
+    @Transient
+    private String agoTime;
 
     public EmailListItem() {
 
@@ -60,6 +65,14 @@ public class EmailListItem implements Serializable {
     public EmailListItem setKey(EmailListItemKey key) {
         this.key = key;
         return this;
+    }
+
+    public String getAgoTime() {
+        return agoTime;
+    }
+
+    public void setAgoTime(String agoTime) {
+        this.agoTime = agoTime;
     }
 
 }

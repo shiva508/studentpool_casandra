@@ -1,4 +1,4 @@
-package com.pool.casandra.controller;
+package com.pool.casandra.controller.rest;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.pool.casandra.entity.EmailListItem;
 import com.pool.casandra.service.EmailListItemService;
 
 @RestController
-@RequestMapping("/api/v1/email")
+@RequestMapping("/api/v1/emaillist")
 public class EmailItemListController {
     @Autowired
     private EmailListItemService emailListItemService;
