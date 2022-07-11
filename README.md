@@ -8,6 +8,6 @@ sudo mvn clean verify spring-boot:build-image
 
 sudo mvn clean verify -Pbuild-with-fabric-8
 
-# BUILDING DOCKER IMAGE WITH fabric-8
+# BUILDING DOCKER IMAGE WITH JIB
 
 sudo mvn clean verify -Pbuild-with-jib
